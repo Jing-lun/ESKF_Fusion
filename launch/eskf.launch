@@ -1,0 +1,21 @@
+<launch>
+    <param name="acc_noise"            type="double" value="1e-4" />
+    <param name="gyr_noise"            type="double" value="1e-4" />
+    <param name="acc_bias_noise"       type="double" value="1e-8" />
+    <param name="gyr_bias_noise"       type="double" value="1e-8" />
+    <param name="odom_noise"           type="double" value="1e-4" />
+    <param name="gnss_noise"           type="double" value="1e-2" />
+    <param name="p_I_GNSS_x"           type="double" value="-0.3312"/>
+    <param name="p_I_GNSS_y"           type="double" value="0.2103"/>
+    <param name="p_I_GNSS_z"           type="double" value="-0.627202"/>
+    <param name="topic_imu"            type="string" value="filter/vectornav/imu"/>
+    <param name="topic_gnss_base"      type="string" value="device/gnss_base/fix"/>
+    <param name="topic_gnss_rover"     type="string" value="device/gnss_rover/fix"/>
+    <param name="topic_odom"           type="string" value="/ctrl_base/odom"/>
+    
+    <node name="run_awv_fusion" pkg="awv_fusion" type="run_awv_fusion" output="screen" />
+
+    <node pkg="rviz" type="rviz" name="rviz" output="screen" 
+      args="-d $(find awv_fusion)/rviz/awv_fusion.rviz" required="true">
+    </node>
+</launch>
